@@ -11,6 +11,9 @@ def main():
     fps = 60
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
+    drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(x, y)
 
     print("Starting Asteroids with pygame version: 2.6.1")
@@ -22,8 +25,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        for drawa in drawable:
+            drawa.draw(screen)
         pygame.display.flip
         dt = clock.tick(fps) / 1000
 
